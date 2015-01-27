@@ -1,0 +1,12 @@
+komentokehotteessa
+	npm install express (tekee node_modules hakemiston)
+
++ uusi tiedosto app.js
+
++ uusi kansio public (t‰nne tarvittavat javascriptit yms.)
+	angular.js (kopioi)
+	index.html
+
+
+komentokehotteessa node app.js k‰ynnist‰‰ ton (locahost:3000)
+

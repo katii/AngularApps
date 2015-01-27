@@ -1,0 +1,17 @@
+<div class='container'>
+    <h1>MiniMarket products</h1>
+    <table class='prod_table'>
+        <thead>
+            <tr>
+                <th>Product name</th>
+                <th>Product price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat='product in products'>
+                <td>{{product.name}}</td>
+                <td>{{product.price}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
