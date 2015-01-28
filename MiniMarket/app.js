@@ -10,6 +10,7 @@ app.use(function(req,res,next){
     console.log(req.method);
     // tässä välissä vois liittää tietokannan, johon sitten suorittaa kyselyjä
     // req.db = db;
+    console.log(req.path);
     next();
 });
 

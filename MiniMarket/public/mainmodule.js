@@ -1,8 +1,9 @@
 var mainMod = angular.module('MiniMarket', ['ngRoute']);
 
+// main configuration for our angular application
 mainMod.config(function($routeProvider, $locationProvider){
     
-    $locationProvider.html5mode(true);
+    $locationProvider.html5Mode(true);
     
     $routeProvider.when('/',{
         templateUrl:'products.html',
