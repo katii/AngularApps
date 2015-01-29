@@ -18,13 +18,26 @@ mainMod.config(function($routeProvider, $locationProvider){
 
 // this is one syntax to create controller but might get broken if this file is
 // minified. Youeman minifier wont break it?
-mainMod.controller('ProductController',function($scope,$location,ProductFactory){
+mainMod.controller('ProductController',function($scope,$location,$route,ProductFactory){
     
     //$scope.jotain = "Jeppe Jippu";
     
-    $scope.props = {
+   // $scope.props = {
         
-        name:'jeppe'
+    //    name:'jeppe'
+    //}
+    
+    $scope.deleteProduct = function(index){
+        
+        console.log(index);
+
+        ProductFactory.deleteItem(index).then(function(data){
+            // tämä ei hyppäytä, mutta jo delete feilaa, ei välttis poistu
+            $scope.products.splice(index,1);
+            
+            // tämä rivi hyppäyttää, mutta toimis aina
+            //$route.reload();
+        });
     }
     
     $scope.next = function(){
@@ -58,17 +71,22 @@ mainMod.controller('UserProduct',['$scope','ProductFactory',function($scope,Prod
     // 
     $scope.product = {
         
-        product_name:'',
-        product_price:'',
+        name:'',
+        price:'',
         post_product:function(){
-            console.log("$scope.product");
+            //console.log("$scope.product");
+            
+            var promise = ProductFactory.postProduct($scope.product);
+            promise.then(function(data){
+                console.log(data);
+            });
         }
     }
     
 }]);
     
 
-mainMod.factory('ProductFactory',function($http,$q){
+mainMod.factory('ProductFactory',function($http,$q,$resource){
     
     var factory = {};
 
@@ -87,6 +105,22 @@ mainMod.factory('ProductFactory',function($http,$q){
         });
         
         return deferred.promise;
+    }
+    
+    factory.postProduct = function(data){
+        
+        // req on resurssiobjekti
+        var req = $resource('/data',{},{'post':{method:'POST'}});
+        return req.post(data).$promise;
+
+        //return $resource('/data',{},{'post':{method:'POST'}}).post(data).$promise;
+    }
+    
+    factory.deleteItem = function(index){
+        
+        var req = $resource('/data/',{id:index},{'delete':{method:'DELETE'}});    
+        return req.delete().$promise;
+    
     }
     
     return factory;

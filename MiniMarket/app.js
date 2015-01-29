@@ -1,8 +1,12 @@
 var express = require('express');
 var path = require('path');
 var user = require('./user');
+var bodyParser = require('body-parser');
 
 var app = express();
+
+// use bodyparser middleware
+app.use(bodyParser.json());
 
 // this function is executed for every request
 // here could check e.g. is user/session correct for request

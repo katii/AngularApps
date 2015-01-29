@@ -1,22 +1,25 @@
 <div class='container'>
     <h1>MiniMarket products</h1>
     <div my-directive></div>
+    <p ng-show='products.length === 0'>There are no products, please add some products.</p>
     <!-- <my-directive></my-directive> -->
-    <table class='prod_table' border='2'>
+    <table ng-show='products.length > 0' class='prod_table' border='2'>
         <!-- <div my-directive kissa='{{jotain}}' products='products'></div> -->
         <!-- <div my-directive location='Kemi,fi'></div> -->
         <!-- <p class="my-directive"></p> -->
-        <input type="text" ng-model="name">
+        <!-- <input type="text" ng-model="name"> -->
         <thead>
             <tr>
                 <th>Product name</th>
                 <th>Product price</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat='product in products'>
                 <td>{{product.name}}</td>
                 <td>{{product.price}}</td>
+                <td><button ng-click='deleteProduct($index)'>Delete</button></td>
             </tr>
         </tbody>
     </table>
