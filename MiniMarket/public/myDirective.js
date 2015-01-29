@@ -12,7 +12,6 @@ module.directive('myDirective',function(){
         templateUrl:'my_directive.html',
         controller:'DirectiveController'
     }
-    
 });
     
 module.controller('DirectiveController',function($scope,$resource){

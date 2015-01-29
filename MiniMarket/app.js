@@ -19,5 +19,6 @@ app.use('/data', user);
 
 // use static files from public folder
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/add', express.static(path.join(__dirname, 'public')));
 
 app.listen(3000);

@@ -14,19 +14,18 @@ mainMod.config(function($routeProvider, $locationProvider){
         templateUrl:'userproduct.html',
         controller:'UserProduct'
     });
-    
 });
 
 // this is one syntax to create controller but might get broken if this file is
 // minified. Youeman minifier wont break it?
-mainMod.controller('ProductController',function($scope,ProductFactory){
+mainMod.controller('ProductController',function($scope,$location,ProductFactory){
     
-    $scope.jotain = "Jeppe Jippu";
+    //$scope.jotain = "Jeppe Jippu";
     
-    //$scope.props = {
-    //    
-    //    name:'jeppe';
-    //}
+    $scope.props = {
+        
+        name:'jeppe'
+    }
     
     $scope.next = function(){
         
@@ -53,7 +52,7 @@ mainMod.controller('ProductController',function($scope,ProductFactory){
 
 // this is another way to create controller or factory/service
 // The minifier wont break the code if you use this syntax
-mainMod.controller('UserProduct',['$scope','ProductFactory',function($csope,ProductFactory){
+mainMod.controller('UserProduct',['$scope','ProductFactory',function($scope,ProductFactory){
     
     // define your scope attributes always in object literal,
     // 
@@ -69,7 +68,7 @@ mainMod.controller('UserProduct',['$scope','ProductFactory',function($csope,Prod
 }]);
     
 
-mainMod.factory('ProductFactory',function($http,$q,$resource){
+mainMod.factory('ProductFactory',function($http,$q){
     
     var factory = {};
 
