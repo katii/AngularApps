@@ -18,7 +18,8 @@ module.directive('myDirective',function(){
 module.controller('DirectiveController',function($scope,$resource){
     
     var data = $resource('http://api.openweathermap.org/data/2.5/weather?q="Oulu,fi"').get(function(){
-        console.log(data.main.temp);
+        console.log(data);
+        console.log(data.base);
         $scope.temp = data.main.temp;
         $scope.city = data.name;
     });

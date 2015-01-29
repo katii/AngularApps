@@ -1,4 +1,4 @@
-var mainMod = angular.module('MiniMarket', ['ngRoute','mvModule']);
+var mainMod = angular.module('MiniMarket', ['ngRoute','mvModule','ngResource']);
 
 // main configuration for our angular application
 mainMod.config(function($routeProvider, $locationProvider){
@@ -11,14 +11,27 @@ mainMod.config(function($routeProvider, $locationProvider){
     });
     
     $routeProvider.when('/add',{
-        templateUrl:'userproduct.html'
+        templateUrl:'userproduct.html',
+        controller:'UserProduct'
     });
     
 });
 
+// this is one syntax to create controller but might get broken if this file is
+// minified. Youeman minifier wont break it?
 mainMod.controller('ProductController',function($scope,ProductFactory){
     
     $scope.jotain = "Jeppe Jippu";
+    
+    //$scope.props = {
+    //    
+    //    name:'jeppe';
+    //}
+    
+    $scope.next = function(){
+        
+        $location.path('/add');
+    }
     
     // $q promisen jälkeen tämän voi poistaa ja...
     //$scope.products = ProductFactory.getProducts($scope);
@@ -38,7 +51,25 @@ mainMod.controller('ProductController',function($scope,ProductFactory){
 
 });
 
-mainMod.factory('ProductFactory',function($http,$q){
+// this is another way to create controller or factory/service
+// The minifier wont break the code if you use this syntax
+mainMod.controller('UserProduct',['$scope','ProductFactory',function($csope,ProductFactory){
+    
+    // define your scope attributes always in object literal,
+    // 
+    $scope.product = {
+        
+        product_name:'',
+        product_price:'',
+        post_product:function(){
+            console.log("$scope.product");
+        }
+    }
+    
+}]);
+    
+
+mainMod.factory('ProductFactory',function($http,$q,$resource){
     
     var factory = {};
 
